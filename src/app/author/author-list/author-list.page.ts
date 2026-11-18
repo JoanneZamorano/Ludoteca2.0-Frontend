@@ -11,7 +11,7 @@ import { AuthorEdit } from '../author-edit/author-edit';
 import { AuthorService } from '../author.service';
 import { Author } from '../model/author';
 import { Pageable } from '../../page/pageable';
-//import { DialogConfirmation } from '../../core/dialog-confirmation/dialog-confirmation';
+import { DialogConfirmationComponent } from '../../core/dialog-confirmation/dialog-confirmation.component';
 //import { DialogError } from '../../core/dialog-error/dialog-error';
 
 @Component({
@@ -80,7 +80,7 @@ export class AuthorListPage implements OnInit {
     }
 
     deleteAuthor(author: Author) {
-        /*const dialogRef = this.dialog.open(DialogConfirmation, {
+        const dialogRef = this.dialog.open(DialogConfirmationComponent, {
             data: {
                 title: 'Eliminar autor',
                 description:
@@ -88,7 +88,7 @@ export class AuthorListPage implements OnInit {
             },
         });
 
-
+/*
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
                 this.authorService.deleteAuthor(author.id).subscribe({
@@ -101,7 +101,7 @@ export class AuthorListPage implements OnInit {
                     })
                 });
             }
-        });
-        */
+        });*/
+        
     }
 }
