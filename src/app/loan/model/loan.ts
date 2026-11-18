@@ -1,5 +1,5 @@
 import { Game } from "../../game/model/Game";
-import { Client } from '../../client/model/Client';
+import { Client } from "../../client/model/client";
 
 export interface Loan {
     id: number;

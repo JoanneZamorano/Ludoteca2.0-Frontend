@@ -20,7 +20,7 @@ import { DialogConfirmationComponent } from '../../core/dialog-confirmation/dial
         CommonModule
     ],
     templateUrl: './client-list.page.html',
-    styleUrl: './client-list.page.css'
+    styleUrl: './client-list.page.scss'
 })
 export class ClientListPage implements OnInit{
 
