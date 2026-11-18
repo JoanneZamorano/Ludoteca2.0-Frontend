@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GameEditComponent } from '../game-edit/game-edit';
 import { GameService } from '../game';
 import { Game } from '../model/Game';
-import { CategoryService } from '../../category/category';
+import { CategoryService } from '../../category/category.service';
 import { Category } from '../../category/model/category';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,7 +32,7 @@ import { GameItemComponent } from './game-item/game-item';
     templateUrl: './game-list.page.html',
     styleUrl: './game-list.page.scss',
 })
-export class GameListComponent implements OnInit {
+export class GameListPage implements OnInit {
     protected readonly categories = signal<Category[]>([]);
     protected readonly games = signal<Game[]>([]);
     protected readonly filterCategory = signal<Category | null>(null);
