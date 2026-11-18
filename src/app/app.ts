@@ -1,12 +1,15 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+    import { Component, signal } from '@angular/core';
+    import { RouterOutlet } from '@angular/router';
+    import { HeaderComponent } from './core/header/header.component';
+  
 
-@Component({
-  imports: [RouterOutlet],
-  selector: 'app-root',
-  styleUrl: './app.scss',
-  templateUrl: './app.html',
-})
-export class App {
-  protected readonly title = signal('ludoteca_frontend');
-}
+    @Component({
+        selector: 'app-root',
+        standalone: true,
+        imports: [RouterOutlet, HeaderComponent],
+        templateUrl: './app.html',
+        styleUrl: './app.scss'
+    })
+    export class App {
+        protected readonly title = signal('Tutorial de Angular');
+    }
