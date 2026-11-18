@@ -19,7 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule ],
     templateUrl: './loan-edit.component.html',
-    styleUrl: './loan-edit.component.css',
+    styleUrl: './loan-edit.component.scss',
 })
 export class LoanEditComponent implements OnInit {
     protected readonly loanService = inject(LoanService);
