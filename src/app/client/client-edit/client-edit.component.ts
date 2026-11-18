@@ -11,8 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
     selector: 'app-client-edit',
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule ],
-    templateUrl: './client-edit.html',
-    styleUrl: './client-edit.css'
+    templateUrl: './client-edit.component.html',
+    styleUrl: './client-edit.component.scss'
 })
 export class ClientEditComponent implements OnInit {
     protected readonly dialogRef = inject(MatDialogRef<ClientEditComponent>);
