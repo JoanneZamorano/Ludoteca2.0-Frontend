@@ -2,23 +2,23 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameService } from '../game';
 import { Game } from '../model/Game';
-import { AuthorService } from '../../author/author';
+import { AuthorService } from '../../author/author.service';
 import { Author } from '../../author/model/author';
-import { CategoryService } from '../../category/category';
+import { CategoryService } from '../../category/category.service';
 import { Category } from '../../category/model/category';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { validateFields } from '../../core/helpers/validateFields';
+//import { validateFields } from '../../core/helpers/validateFields';
 
 @Component({
     selector: 'app-game-edit',
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule ],
     templateUrl: './game-edit.html',
-    styleUrl: './game-edit.scss',
+    styleUrl: './game-edit.scss'
 })
 export class GameEditComponent implements OnInit {
     protected readonly id = signal<number | null>(null);
@@ -65,9 +65,9 @@ export class GameEditComponent implements OnInit {
         const requiredFields = ["title", "age", "categoryId", "authorId"] as const
         const data = { title, age, categoryId, authorId }
 
-        if (!validateFields(data, requiredFields)) {
+        /*if (!validateFields(data, requiredFields)) {
             return;
-        }
+        }*/
 
         const game = {
             id,
