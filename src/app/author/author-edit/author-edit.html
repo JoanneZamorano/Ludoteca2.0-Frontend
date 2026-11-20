@@ -19,7 +19,26 @@
 
         <mat-form-field>
             <mat-label>Nacionalidad</mat-label>
-            <input type="text" matInput placeholder="Nombre del autor" [(ngModel)]="name" name="name" required>
+            <mat-select
+                [formControl]="nacionalidadCtrl"
+                placeholder="Nacionalidad del autor"
+                #singleSelect
+                required>
+
+            <mat-option>
+                <ngx-mat-select-search
+                    [formControl]="nacionalidadFilterCtrl"
+                    placeholderLabel="Buscar país..."
+                    noEntriesFoundLabel="Ningún país encontrado">
+                </ngx-mat-select-search>
+            </mat-option>
+
+            @for (nacionalidad of $filteredNacionalidades(); track nacionalidad) {
+            <mat-option [value]="nacionalidad">
+                {{ nacionalidad }}
+            </mat-option>
+            }
+            </mat-select>
             <mat-error>La nacionalidad no puede estar vacía</mat-error>
         </mat-form-field>
     </form>
