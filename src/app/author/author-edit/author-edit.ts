@@ -30,14 +30,10 @@ export class AuthorEdit implements OnInit {
 
     protected readonly id = signal<number | null>(null);
     protected readonly name = signal<string | null>(null);
-    protected readonly nationality = signal<string | null>(null);
 
-    protected nacionalidades: string[] = NACIONALIDADES;
+    protected nacionalidades = NACIONALIDADES;
 
-    public nacionalidadCtrl = new FormControl<string | null>(
-        this.nacionalidades[62]
-    );
-
+    public nacionalidadCtrl = new FormControl<string | null>(null);
     public nacionalidadFilterCtrl = new FormControl<string>('',{ nonNullable: true });
 
     private $nacionalidadControlChanges = toSignal(
@@ -54,19 +50,23 @@ export class AuthorEdit implements OnInit {
             .trim()
             .toLowerCase();
 
-    if (!search) {
-        return this.nacionalidades;
-    }
+        if (!search) {
+            return this.nacionalidades;
+        }
 
-    return this.nacionalidades.filter(nacionalidad =>
-        nacionalidad.toLowerCase().includes(search)
+        return this.nacionalidades.filter(nacionalidad =>
+            nacionalidad.name.toLowerCase().includes(search)
         );
-    }); 
+    });
 
     loadFormData(initialData: Author | null) {
+
         this.id.set(initialData?.id ?? null);
         this.name.set(initialData?.name ?? null);
-        this.nationality.set(initialData?.nationality ?? null);
+
+        this.nacionalidadCtrl.setValue(
+            initialData?.nationality ?? 'ESP'
+        );
     }
 
     ngOnInit(): void {
@@ -76,7 +76,7 @@ export class AuthorEdit implements OnInit {
     onSave() {
         const id = this.id();
         const name = this.name();
-        const nationality = this.nationality();
+        const nationality = this.nacionalidadCtrl.value;
 
         const requiredFields = ["name", "nationality"] as const
         const data = { name, nationality }

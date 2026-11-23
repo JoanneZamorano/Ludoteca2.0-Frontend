@@ -33,10 +33,10 @@
                 </ngx-mat-select-search>
             </mat-option>
 
-            @for (nacionalidad of $filteredNacionalidades(); track nacionalidad) {
-            <mat-option [value]="nacionalidad">
-                {{ nacionalidad }}
-            </mat-option>
+            @for (nacionalidad of $filteredNacionalidades(); track nacionalidad.code) {
+                <mat-option [value]="nacionalidad.code">
+                    {{ nacionalidad.name }}
+                </mat-option>
             }
             </mat-select>
             <mat-error>La nacionalidad no puede estar vacía</mat-error>

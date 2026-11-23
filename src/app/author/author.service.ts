@@ -20,7 +20,7 @@ export class AuthorService {
 
     saveAuthor(author: Author): Observable<Author> {
         const {id} = author;
-        const url = id ? `${this.baseUrl}${id}` : this.baseUrl;
+        const url = id ? `${this.baseUrl}/${id}` : this.baseUrl;
         return this.http.put<Author>(url, author);
     }
 
