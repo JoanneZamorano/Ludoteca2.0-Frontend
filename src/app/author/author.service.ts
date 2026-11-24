@@ -6,13 +6,14 @@ import { Observable, of } from 'rxjs';
 import { Pageable } from '../page/pageable';
 import { Author } from './model/author';
 import { PaginatedData } from '../page/paginated-data';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthorService {
     protected readonly http = inject(HttpClient);
-    private baseUrl = 'http://localhost:8080/author';
+    private baseUrl = `${environment.apiUrl}/author`;
 
     getAuthors(pageable: Pageable): Observable<PaginatedData<Author>> {
         return this.http.post<PaginatedData<Author>>(this.baseUrl, { pageable: pageable });

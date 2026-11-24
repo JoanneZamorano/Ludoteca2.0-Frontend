@@ -4,6 +4,7 @@ import { Pageable } from '../page/pageable';
 import { Loan } from './model/loan';
 import { PaginatedData } from '../page/paginated-data';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -12,7 +13,9 @@ import { HttpClient } from '@angular/common/http';
 export class LoanService {
     protected readonly http = inject(HttpClient);
 
-    private baseUrl = 'http://localhost:8080/loan';
+    private baseUrl = `${environment.apiUrl}/loan`;
+    
+
 
     getLoans(pageable: Pageable, idGame: number | null, idClient: number | null, date: string | null): Observable<PaginatedData<Loan>> {
         return this.http.post<PaginatedData<Loan>>(this.baseUrl, { pageable: pageable, idGame: idGame, idClient: idClient, date: date });
