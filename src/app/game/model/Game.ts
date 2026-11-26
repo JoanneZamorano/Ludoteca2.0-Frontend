@@ -7,4 +7,5 @@ export interface Game {
     age: number;
     category: Category;
     author: Author;
+    image?: string;
 }
