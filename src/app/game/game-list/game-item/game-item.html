@@ -1,7 +1,8 @@
 <div class="container">
     <mat-card>
         <div class="photo">
-            <img src="img/foto.png">
+            <img [src]="'img/' + game().image"
+                 [alt]="game().title">
         </div>
         <div class="detail">
             <div class="title">{{game().title}}</div>

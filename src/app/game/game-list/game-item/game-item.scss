@@ -12,8 +12,10 @@
             margin-right: 10px;
 
             img {
-                width: 80px;
-                height: 80px;
+                width: 120px;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 8px;
             }
         }
 
