@@ -13,7 +13,11 @@
 
         <mat-form-field>
             <mat-label>Nombre del juego</mat-label>
-            <mat-select disableRipple [(ngModel)]="gameId" name="game" required>
+            <mat-select disableRipple 
+                 [ngModel]="gameId()"
+                 (ngModelChange)="gameId.set($event)"
+                 name="game"
+                 required>
                 @for (gam of games(); track gam.id) {
                     <mat-option [value]="gam.id">{{gam.title}}</mat-option>
                 }
@@ -23,7 +27,11 @@
 
         <mat-form-field>
             <mat-label>Nombre del cliente</mat-label>
-            <mat-select disableRipple [(ngModel)]="clientId" name="client" required>
+            <mat-select disableRipple 
+             [ngModel]="clientId()"
+             (ngModelChange)="clientId.set($event)"
+             name="client"
+             required>
                 @for (cli of clients(); track cli.id) {
                     <mat-option [value]="cli.id">{{cli.name}}</mat-option>
                 }
@@ -31,20 +39,36 @@
             <mat-error>El nombre del cliente no puede estar vacío</mat-error>
         </mat-form-field>
 
-                <mat-form-field>
+        <mat-form-field>
             <mat-label>Fecha de préstamo</mat-label>
-            <input matInput [matDatepicker]="startPicker" [(ngModel)]="startDate" name="startDate" required>
-            <mat-datepicker-toggle [for]="startPicker"></mat-datepicker-toggle>
+            <input
+                 matInput
+                 [matDatepicker]="startPicker"
+                 [ngModel]="startDate()"
+                 (ngModelChange)="startDate.set($event)"
+                 name="startDate"
+                 [matDatepickerFilter]="weekdayFilter"
+                 required>
+            <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
             <mat-datepicker #startPicker></mat-datepicker>
-            <mat-error>La fecha no puede estar vacía</mat-error>
+            <mat-error>La fecha es obligatoria</mat-error>
         </mat-form-field>
 
-                <mat-form-field>
+        <mat-form-field>
             <mat-label>Fecha de devolución</mat-label>
-            <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" name="endDate" required>
-            <mat-datepicker-toggle [for]="endPicker"></mat-datepicker-toggle>
+            <input
+                 matInput
+                   [matDatepicker]="endPicker"
+                   [ngModel]="endDate()"
+                   (ngModelChange)="endDate.set($event)"
+                   name="endDate"
+                   [matDatepickerFilter]="weekdayFilter"
+                   [min]="startDate()"
+                   [max]="maxEndDate()"
+                   required>
+            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
             <mat-datepicker #endPicker></mat-datepicker>
-            <mat-error>La fecha no puede estar vacía</mat-error>
+            <mat-error>La fecha es obligatoria</mat-error>
         </mat-form-field>
 
         @if (errorMessage()){

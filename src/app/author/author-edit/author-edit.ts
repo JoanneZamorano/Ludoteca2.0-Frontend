@@ -14,7 +14,7 @@ import { NACIONALIDADES} from '../nacionalidades';
 
 import { AuthorService } from '../author.service';
 import { Author } from '../model/author';
-//import { validateFields } from '../../core/helpers/validation.helper';
+import { validateFields } from '../../core/helpers/validation.helper';
 
 @Component({
     selector: 'app-author-edit',
@@ -81,10 +81,10 @@ export class AuthorEdit implements OnInit {
         const requiredFields = ["name", "nationality"] as const
         const data = { name, nationality }
 
-        /*if (!validateFields(data, requiredFields)) {
+        if (!validateFields(data, requiredFields)) {
             return;
         }
-            */
+            
 
         const author = {
             id,

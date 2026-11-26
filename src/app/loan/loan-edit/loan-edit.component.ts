@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-//import { validateFields } from '../../core/helpers/validation.helper';
+import { validateFields } from '../../core/helpers/validation.helper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -37,6 +37,35 @@ export class LoanEditComponent implements OnInit {
     protected readonly clients = signal<Client[]>([]);
     protected readonly errorMessage = signal<string | null>(null);
 
+    protected readonly weekdayFilter = (date: Date | null): boolean => {
+        if (!date) {
+            return false;
+        }
+        const day = date.getDay();  //0=domingo, 6=sábado
+        return day !== 0 && day !== 6;
+    };
+
+    protected maxEndDate = signal<Date | null>(null);
+
+
+    protected onStartDateChange(date: Date | null): void {
+
+         this.startDate.set(date);
+
+         if (!date) {
+             this.maxEndDate.set(null);
+             return;
+        }
+
+         const max = new Date(date);
+         max.setDate(max.getDate() + 14);
+
+         this.maxEndDate.set(max);
+
+         if (this.endDate() && this.endDate()! > max) {
+            this.endDate.set(null);
+        }
+    };
 
     ngOnInit(): void {
     this.loadFormData(this.data.loan ?? null);
@@ -69,9 +98,9 @@ export class LoanEditComponent implements OnInit {
         const requiredFields = ["gameId", "clientId", "startDate", "endDate"] as const
         const data = { gameId, clientId, startDate, endDate }
 
-//        if (!validateFields(data, requiredFields)) {
-//            return;
-//        }
+        if (!validateFields(data, requiredFields)) {
+            return;
+        }
 
         const loan = {
             id,
@@ -87,6 +116,30 @@ export class LoanEditComponent implements OnInit {
             next:() => {
             this.dialogRef.close(true);
             },
+
+        error: (err) => {
+
+        const message =
+                  err.error?.message ||
+                  err.error?.detail ||
+                  err.message;
+
+            console.log(message);
+
+            if(message?.includes('Fecha de devolución')) {
+                this.errorMessage.set('La fecha de devolución no puede ser anterior a la fecha de préstamo');
+        } else if (message?.includes('14 días')) {
+                this.errorMessage.set('El préstamo no puede superar los 14 días');
+        } else if (message?.includes('Juego no disponible')) {
+                this.errorMessage.set('El juego ya está prestado en las fechas seleccionadas');
+        } else if (message?.includes('2 préstamos')) {
+                this.errorMessage.set('El cliente ya tiene 2 préstamos en las fechas seleccionadas');
+         } else if (message?.includes('fin de semana')) {
+                this.errorMessage.set('Las fechas de préstamo y devolución no pueden ser sábado ni domingo');
+        } else {
+            this.errorMessage.set('Se ha producido un error al guardar el préstamo');
+        }
+        },
 
       });
 
