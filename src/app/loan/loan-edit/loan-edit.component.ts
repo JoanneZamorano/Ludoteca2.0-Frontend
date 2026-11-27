@@ -76,7 +76,7 @@ export class LoanEditComponent implements OnInit {
 
         this.gameService.getGames().subscribe((gams) => {
             this.games.set(gams);
-            this.gameId.set(initialData?.game?.id ?? null);
+            this.gameId.set(initialData?.product?.id ?? null);
         });
 
         this.clientService.getClients().subscribe((clis) => {
@@ -104,7 +104,7 @@ export class LoanEditComponent implements OnInit {
 
         const loan = {
             id,
-            game: this.games().find(g => g.id === gameId) ?? null,
+            product: this.games().find(g => g.id === gameId) ?? null,
             client: this.clients().find(c => c.id === clientId) ?? null,
             startDate,
             endDate,

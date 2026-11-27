@@ -11,7 +11,7 @@ providedIn: 'root',
 export class GameService {
     protected readonly http = inject(HttpClient);
 
-        private baseUrl = `${environment.apiUrl}/game`;
+        private baseUrl = `${environment.apiUrl}/product`;
 
 
     getGames(title?: string, categoryId?: number): Observable<Game[]> {

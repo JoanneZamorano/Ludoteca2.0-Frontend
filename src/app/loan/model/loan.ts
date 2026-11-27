@@ -3,7 +3,7 @@ import { Client } from "../../client/model/client";
 
 export interface Loan {
     id: number;
-    game: Game;
+    product: Game;
     client: Client;
     startDate: string;
     endDate: string;

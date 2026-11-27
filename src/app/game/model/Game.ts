@@ -8,4 +8,5 @@ export interface Game {
     category: Category;
     author: Author;
     image?: string;
+    subcategory: string;
 }
